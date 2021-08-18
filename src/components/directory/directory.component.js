@@ -40,14 +40,8 @@ export default function Directory(props) {
 
   return (
     <div className="directory-menu">
-      {sections.map(({ id, title, imageUrl, size }) => (
-        <MenuItem
-          key={id}
-          title={title}
-          subtitle="SHOP NOW"
-          imageUrl={imageUrl}
-          size={size}
-        />
+      {sections.map(({ id, ...otherSectionProps }) => (
+        <MenuItem key={id} {...otherSectionProps} />
       ))}
     </div>
   );
