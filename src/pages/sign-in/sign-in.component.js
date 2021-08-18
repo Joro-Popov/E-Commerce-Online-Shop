@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -11,6 +11,7 @@ import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+import { signInWithGoogle } from "../../utils/firebase";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,11 +44,16 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  signInWithGoogle: {
+    margin: theme.spacing(3, 0, 2),
+    backgroundColor: "#4285f4",
+    color: "white",
+  },
 }));
 
 export default function SignInSide() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const classes = useStyles();
 
@@ -102,11 +108,19 @@ export default function SignInSide() {
               type="submit"
               fullWidth
               variant="contained"
-              color="primary"
+              color="secondary"
               className={classes.submit}
               onClick={handleSubmit}
             >
               Sign In
+            </Button>
+            <Button
+              fullWidth
+              variant="contained"
+              className={classes.signInWithGoogle}
+              onClick={signInWithGoogle}
+            >
+              Sign In with Google
             </Button>
             <Grid container>
               <Grid item xs>
