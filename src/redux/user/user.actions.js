@@ -1,11 +1,10 @@
-import {SET_CURRENT_USER} from '../actionTypes';
+import {SET_CURRENT_USER} from './user.types';
 
 const setCurrentuserSuccess = (user) => ({
   type: SET_CURRENT_USER,
   payload: user,
 });
 
-// Composite Action Creators
 export const setCurrentUser = (user) => async (dispatch) => {
   try {
     dispatch(setCurrentuserSuccess(user));
