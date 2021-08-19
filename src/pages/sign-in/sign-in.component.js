@@ -60,9 +60,8 @@ export default function SignInSide() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await AuthService.signInWithEmailAndPassword(email, password);
     try {
-
+       await AuthService.signInWithEmailAndPassword(email, password);
     } catch (error) {
       console.error(error);
     }
