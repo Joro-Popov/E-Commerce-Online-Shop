@@ -11,6 +11,7 @@ import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+import AuthService from '../../services/AuthService';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -53,9 +54,20 @@ export default function SignInSide() {
 
   const classes = useStyles();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
+    if (password !== confirmPassword) {
+      alert("passwords don't match");
+      return;
+    }
+
+    try {
+      const user = await AuthService.signUp(email, password);
+      await AuthService.createUserProfile(user, {displayName: name});
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
