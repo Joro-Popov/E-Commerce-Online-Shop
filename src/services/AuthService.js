@@ -1,6 +1,10 @@
 import { firestore, auth } from "../utils/firebase";
 
-const signUp = async (email, password) => {
+const signInWithEmailAndPassword = async (email, password) => {
+  await auth.signInWithEmailAndPassword(email, password);
+};
+
+const signUpWithEmailAndPassword = async (email, password) => {
   const {user} = await auth.createUserWithEmailAndPassword(email, password);
   return user;
 };
@@ -30,7 +34,8 @@ const createUserProfile = async (userAuth, additionalData) => {
 
 const authService = {
   createUserProfile,
-  signUp,
+  signUpWithEmailAndPassword,
+  signInWithEmailAndPassword,
 };
 
 export default authService;

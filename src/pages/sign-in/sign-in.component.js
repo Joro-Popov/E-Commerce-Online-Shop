@@ -12,6 +12,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { signInWithGoogle } from "../../utils/firebase";
+import AuthService from '../../services/AuthService';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -57,8 +58,14 @@ export default function SignInSide() {
 
   const classes = useStyles();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    await AuthService.signInWithEmailAndPassword(email, password);
+    try {
+
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
