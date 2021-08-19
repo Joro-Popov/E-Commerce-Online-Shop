@@ -11,7 +11,6 @@ export default function CartDropdown() {
           fullWidth
           variant="contained"
           className="button"
-          // style={{backgroundColor: 'black', color: 'white'}}
           onClick={() => {}}
         >
           GO TO CHECKOUT
