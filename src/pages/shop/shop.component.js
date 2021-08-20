@@ -1,15 +1,11 @@
-import React, { useState } from "react";
-import SHOP_DATA from "../../MockedData/shopData";
-import PreviewCollection from "../../components/preview-collection";
+import React from "react";
+import CollectionsOverview from '../../components/collections-overview';
 
-export default function ShopPage(props) {
-  const [collections] = useState(SHOP_DATA);
-
+export default function ShopPage() {
   return (
     <div className="shop-page">
-      {collections.map(({ id, ...otherCollectionProps }) => (
-        <PreviewCollection key={id} {...otherCollectionProps}/>
-      ))}
+      <CollectionsOverview />
     </div>
   );
 }
+

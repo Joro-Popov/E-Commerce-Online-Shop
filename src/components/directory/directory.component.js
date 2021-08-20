@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
+import { connect } from 'react-redux';
 import "./directory.component.scss";
 import MenuItem from "../menu-item";
-import CATEGORIES_DATA from '../../MockedData/categoriesData';
+import { createStructuredSelector } from "reselect";
+import { selectSections } from '../../redux/directory/directory.selectors';
 
-export default function Directory(props) {
-  const [sections] = useState(CATEGORIES_DATA);
-
+function Directory({sections}) {
   return (
     <div className="directory-menu">
       {sections.map(({ id, ...otherSectionProps }) => (
@@ -14,3 +14,9 @@ export default function Directory(props) {
     </div>
   );
 }
+
+const mapStateToProps = createStructuredSelector({
+  sections: selectSections,
+});
+
+export default connect(mapStateToProps, null)(Directory);
