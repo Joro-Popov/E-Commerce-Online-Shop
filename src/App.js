@@ -1,21 +1,21 @@
-import React, {useEffect} from 'react';
-import {connect} from 'react-redux';
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { Switch, Route, Redirect } from "react-router-dom";
 
-import './App.css';
+import "./App.css";
 
-import {auth} from './utils/firebase';
-import AuthService from './services/AuthService';
+import { auth } from "./utils/firebase";
+import AuthService from "./services/AuthService";
 import { setCurrentUser } from "./redux/user/user.actions";
 import { selectCurrentUser } from "./redux/user/user.selectors";
 
-import Header from './components/header';
+import Header from "./components/header";
 import HomePage from "./pages/homepage";
-import ShopPage from './pages/shop';
-import SignIn from './pages/sign-in';
-import SignUp from './pages/sign-up';
-import CheckoutPage from './pages/checkout';
+import ShopPage from "./pages/shop";
+import SignIn from "./pages/sign-in";
+import SignUp from "./pages/sign-up";
+import CheckoutPage from "./pages/checkout";
 
 function App({ setCurrentUser, currentUser }) {
   useEffect(() => {

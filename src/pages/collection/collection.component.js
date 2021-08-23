@@ -9,7 +9,7 @@ import {
   ItemsContainer,
 } from "./collection.styles";
 
-function CollectionPage({ match, collection }) {
+function CollectionPage({ collection }) {
     const {title, items} = collection;
 
     return (
