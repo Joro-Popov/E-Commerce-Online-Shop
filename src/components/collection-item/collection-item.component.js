@@ -1,20 +1,26 @@
 import React from "react";
 import { connect } from "react-redux";
-import "./collection-item.styles.scss";
-import Button from "@material-ui/core/Button";
 import { addItemToCart } from "../../redux/cart/cart.actions";
+import {
+  CollectionItemContainer,
+  ImageContainer,
+  CollectionFooterContainer,
+  NameContainer,
+  PriceContainer,
+  ButtonContainer,
+} from "./collection-item.styles";
 
 function CollectionItem({ item, addItemToCart }) {
   const { name, price, imageUrl } = item;
 
   return (
-    <div className="collection-item">
-      <div style={{ backgroundImage: `url(${imageUrl})` }} className="image" />
-      <div className="collection-footer">
-        <span className="name">{name}</span>
-        <span className="price">${price}</span>
-      </div>
-      <Button
+    <CollectionItemContainer>
+      <ImageContainer style={{ backgroundImage: `url(${imageUrl})` }} />
+      <CollectionFooterContainer>
+        <NameContainer className="name">{name}</NameContainer>
+        <PriceContainer className="price">${price}</PriceContainer>
+      </CollectionFooterContainer>
+      <ButtonContainer
         type="submit"
         fullWidth
         variant="contained"
@@ -22,8 +28,8 @@ function CollectionItem({ item, addItemToCart }) {
         onClick={() => addItemToCart(item)}
       >
         ADD TO CART
-      </Button>
-    </div>
+      </ButtonContainer>
+    </CollectionItemContainer>
   );
 }
 
