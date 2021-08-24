@@ -1,40 +1,28 @@
 import React, { useEffect } from "react";
-import {connect} from 'react-redux';
 import { Route } from "react-router-dom";
-import { createStructuredSelector } from "reselect";
-import CollectionsOverview from "../../components/collections-overview";
-import CollectionPage from "../collection";
+import CollectionsOverviewContainer from "../../components/collections-overview/collections-overview.container";
+import CollectionsContainer from "../collection/collection.container";
 import DatabaseService from "../../services/DatabaseService";
-import WithSpinner from "../../components/with-spinner";
-import { selectIsLoading } from "../../redux/common/common.selectors";
 
-function ShopPage({ match, isLoading }) {
+export default function ShopPage({ match }) {
   useEffect(() => {
     (async () => {
       await DatabaseService.fetchShopCollections();
     })();
   }, []);
 
-  const CollectionsOverviewWithSpinner = WithSpinner(CollectionsOverview);
-  const CollectionPageWithSpinner = WithSpinner(CollectionPage);
-
   return (
     <div>
       <Route
         exact
         path={`${match.path}`}
-        render={(props) => <CollectionsOverviewWithSpinner isLoading={isLoading} {...props}/>}
+        component={CollectionsOverviewContainer}
       />
       <Route
         path={`${match.path}/:collectionId`}
-        render={(props) => <CollectionPageWithSpinner isLoading={isLoading} {...props} />}
+        component={CollectionsContainer}
       />
     </div>
   );
 }
 
-const mapStateToProps = createStructuredSelector({
-  isLoading: selectIsLoading,
-});
-
-export default connect(mapStateToProps, null)(ShopPage);
