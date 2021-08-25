@@ -12,8 +12,11 @@ import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import AuthService from '../../services/AuthService';
-import { googleSignInStart } from '../../redux/user/user.actions';
+
+import {
+  googleSignInStart,
+  emailSignInStart,
+} from "../../redux/user/user.actions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -53,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SignIn({ googleSignInStart }) {
+function SignIn({ googleSignInStart, emailSignInStart }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -61,11 +64,7 @@ function SignIn({ googleSignInStart }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    try {
-      await AuthService.signInWithEmailAndPassword(email, password);
-    } catch (error) {
-      console.error(error);
-    }
+    emailSignInStart(email, password);
   };
 
   return (
@@ -148,8 +147,9 @@ function SignIn({ googleSignInStart }) {
   );
 }
 
-const mapDispatchToProps = dispatch => ({
-  googleSignInStart: () => dispatch(googleSignInStart())
+const mapDispatchToProps = (dispatch) => ({
+  googleSignInStart: () => dispatch(googleSignInStart()),
+  emailSignInStart: (email, password) => dispatch(emailSignInStart({email, password})),
 });
 
 export default connect(null, mapDispatchToProps)(SignIn);

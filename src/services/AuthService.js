@@ -1,11 +1,12 @@
 import { firestore, auth } from "../utils/firebase";
 
 const signInWithEmailAndPassword = async (email, password) => {
-  await auth.signInWithEmailAndPassword(email, password);
+  const { user } = await auth.signInWithEmailAndPassword(email, password);
+  return user;
 };
 
 const signUpWithEmailAndPassword = async (email, password) => {
-  const {user} = await auth.createUserWithEmailAndPassword(email, password);
+  const { user } = await auth.createUserWithEmailAndPassword(email, password);
   return user;
 };
 
