@@ -1,14 +1,13 @@
 import React, { useEffect } from "react";
+import { connect } from 'react-redux';
 import { Route } from "react-router-dom";
 import CollectionsOverviewContainer from "../../components/collections-overview/collections-overview.container";
 import CollectionsContainer from "../collection/collection.container";
-import DatabaseService from "../../services/DatabaseService";
+import { fetchCollectionsStart } from "../../redux/shop/shop.actions";
 
-export default function ShopPage({ match }) {
+function ShopPage({ match, fetchCollectionsStart }) {
   useEffect(() => {
-    (async () => {
-      await DatabaseService.fetchShopCollections();
-    })();
+    fetchCollectionsStart();
   }, []);
 
   return (
@@ -26,3 +25,8 @@ export default function ShopPage({ match }) {
   );
 }
 
+const mapDispatchToProps = (dispatch) => ({
+  fetchCollectionsStart: () => dispatch(fetchCollectionsStart()),
+});
+
+export default connect(null, mapDispatchToProps)(ShopPage);

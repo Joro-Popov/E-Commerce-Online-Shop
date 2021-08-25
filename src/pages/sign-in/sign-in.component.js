@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { connect } from 'react-redux';
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -11,8 +12,8 @@ import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import { signInWithGoogle } from "../../utils/firebase";
 import AuthService from '../../services/AuthService';
+import { googleSignInStart } from '../../redux/user/user.actions';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -52,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignInSide() {
+function SignIn({ googleSignInStart }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -61,7 +62,7 @@ export default function SignInSide() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-       await AuthService.signInWithEmailAndPassword(email, password);
+      await AuthService.signInWithEmailAndPassword(email, password);
     } catch (error) {
       console.error(error);
     }
@@ -124,7 +125,7 @@ export default function SignInSide() {
               fullWidth
               variant="contained"
               className={classes.signInWithGoogle}
-              onClick={signInWithGoogle}
+              onClick={googleSignInStart}
             >
               Sign In with Google
             </Button>
@@ -146,3 +147,9 @@ export default function SignInSide() {
     </Grid>
   );
 }
+
+const mapDispatchToProps = dispatch => ({
+  googleSignInStart: () => dispatch(googleSignInStart())
+});
+
+export default connect(null, mapDispatchToProps)(SignIn);
