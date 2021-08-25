@@ -10,6 +10,10 @@ const signUpWithEmailAndPassword = async (email, password) => {
   return user;
 };
 
+const signOut = async () => {
+  await auth.signOut();
+};
+
 const createUserProfile = async (userAuth, additionalData) => {
   const userRef = await firestore.doc(`users/${userAuth.uid}`);
   const snapshot = await userRef.get();
@@ -47,6 +51,7 @@ const authService = {
   signUpWithEmailAndPassword,
   signInWithEmailAndPassword,
   getCurrentUser,
+  signOut,
 };
 
 export default authService;
