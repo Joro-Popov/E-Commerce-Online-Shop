@@ -33,10 +33,20 @@ const createUserProfile = async (userAuth, additionalData) => {
   return userRef;
 };
 
+const getCurrentUser = async () => {
+  return await new Promise((resolve, reject) => {
+    const unsubscribe = auth.onAuthStateChanged((authUser) => {
+      unsubscribe();
+      resolve(authUser);
+    }, reject);
+  });
+};
+
 const authService = {
   createUserProfile,
   signUpWithEmailAndPassword,
   signInWithEmailAndPassword,
+  getCurrentUser,
 };
 
 export default authService;
