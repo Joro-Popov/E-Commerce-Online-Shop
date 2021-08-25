@@ -1,8 +1,9 @@
 import {
-  TOGGLE_CART_DROPDOWN,
-  ADD_ITEM,
-  REMOVE_ITEM_FROM_CART,
-  CLEAR_ITEM_FROM_CART,
+  TOGGLE_CART_DROPDOWN_SUCCESS,
+  ADD_ITEM_SUCCESS,
+  REMOVE_ITEM_FROM_CART_SUCCESS,
+  CLEAR_ITEM_FROM_CART_SUCCESS,
+  CLEAR_CART,
 } from "./cart.types";
 import {
   addItemToCart,
@@ -17,28 +18,34 @@ const INITIAL_STATE = {
 
 const cartReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case TOGGLE_CART_DROPDOWN: {
+    case TOGGLE_CART_DROPDOWN_SUCCESS: {
       return {
         ...state,
         hidden: !state.hidden,
       };
     }
-    case ADD_ITEM: {
+    case ADD_ITEM_SUCCESS: {
       return {
         ...state,
         cartItems: addItemToCart(state.cartItems, action.payload),
       };
     }
-    case CLEAR_ITEM_FROM_CART: {
+    case CLEAR_ITEM_FROM_CART_SUCCESS: {
       return {
         ...state,
         cartItems: clearItemFromCart(state.cartItems, action.payload),
       };
     }
-    case REMOVE_ITEM_FROM_CART: {
+    case REMOVE_ITEM_FROM_CART_SUCCESS: {
       return {
         ...state,
         cartItems: removeItemFromCart(state.cartItems, action.payload),
+      };
+    }
+    case CLEAR_CART: {
+      return {
+        ...state,
+        cartItems: [],
       };
     }
     default:

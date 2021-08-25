@@ -1,57 +1,53 @@
 import {
-  TOGGLE_CART_DROPDOWN,
-  ADD_ITEM,
-  REMOVE_ITEM_FROM_CART,
-  CLEAR_ITEM_FROM_CART,
+  TOGGLE_CART_DROPDOWN_START,
+  ADD_ITEM_TO_CART_START,
+  REMOVE_ITEM_FROM_CART_START,
+  CLEAR_ITEM_FROM_CART_START,
+  CLEAR_CART,
+  ADD_ITEM_SUCCESS,
+  CLEAR_ITEM_FROM_CART_SUCCESS,
+  REMOVE_ITEM_FROM_CART_SUCCESS,
+  TOGGLE_CART_DROPDOWN_SUCCESS,
 } from "./cart.types";
 
-const toggleCartDropdownSuccess = () => ({
-  type: TOGGLE_CART_DROPDOWN,
+export const toggleCartDropdownSuccess = () => ({
+  type: TOGGLE_CART_DROPDOWN_SUCCESS,
 });
 
-const addItemToCartSuccess = (item) => ({
-  type: ADD_ITEM,
+export const toggleCartDropdownStart = () => ({
+  type: TOGGLE_CART_DROPDOWN_START,
+});
+
+export const addItemToCartSuccess = (item) => ({
+  type: ADD_ITEM_SUCCESS,
   payload: item,
 });
 
-const clearItemFromCartSuccess = (item) => ({
-  type: CLEAR_ITEM_FROM_CART,
+export const addItemToCartStart = (item) => ({
+  type: ADD_ITEM_TO_CART_START,
   payload: item,
 });
 
-const removeItemFromCartSuccess = (item) => ({
-  type: REMOVE_ITEM_FROM_CART,
+export const clearItemFromCartSuccess = (item) => ({
+  type: CLEAR_ITEM_FROM_CART_SUCCESS,
   payload: item,
 });
 
-export const toggleCartDropdown = () => async (dispatch) => {
-  try {
-    dispatch(toggleCartDropdownSuccess());
-  } catch (error) {
-    console.error(error);
-  }
-};
+export const clearItemFromCartStart = (item) => ({
+  type: CLEAR_ITEM_FROM_CART_START,
+  payload: item,
+});
 
-export const addItemToCart = (item) => async (dispatch) => {
-  try {
-    dispatch(addItemToCartSuccess(item));
-  } catch (error) {
-    console.error(error);
-  }
-};
+export const removeItemFromCartSuccess = (item) => ({
+  type: REMOVE_ITEM_FROM_CART_SUCCESS,
+  payload: item,
+});
 
-export const clearItemFromCart = (item) => async (dispatch) => {
-  try {
-    dispatch(clearItemFromCartSuccess(item));
-  } catch (error) {
-    console.error(error);
-  }
-};
+export const removeItemFromCartStart = (item) => ({
+  type: REMOVE_ITEM_FROM_CART_START,
+  payload: item,
+});
 
-export const removeItemFromCart = (item) => async (dispatch) => {
-  try {
-    dispatch(removeItemFromCartSuccess(item));
-  } catch (error) {
-    console.error(error);
-  }
-};
+export const clearCart = () => ({
+  type: CLEAR_CART
+});

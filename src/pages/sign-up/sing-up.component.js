@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { connect } from 'react-redux';
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -12,6 +13,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import AuthService from "../../services/AuthService";
+import { signUpStart } from '../../redux/user/user.actions';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -46,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignInSide() {
+function SignUp({ signUpStart }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -62,15 +64,16 @@ export default function SignInSide() {
       return;
     }
 
-    try {
-      const user = await AuthService.signUpWithEmailAndPassword(
-        email,
-        password
-      );
-      await AuthService.createUserProfile(user, { displayName: name });
-    } catch (error) {
-      console.error(error);
-    }
+    signUpStart(email, password);
+    // try {
+    //   const user = await AuthService.signUpWithEmailAndPassword(
+    //     email,
+    //     password
+    //   );
+    //   await AuthService.createUserProfile(user, { displayName: name });
+    // } catch (error) {
+    //   console.error(error);
+    // }
   };
 
   return (
@@ -164,3 +167,9 @@ export default function SignInSide() {
     </Grid>
   );
 }
+
+const mapDispatchToProps = (dispatch) => ({
+  signUpStart: (email, password) => dispatch(signUpStart({email, password})),
+});
+
+export default connect(null, mapDispatchToProps)(SignUp);

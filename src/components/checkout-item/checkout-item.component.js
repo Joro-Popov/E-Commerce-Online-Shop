@@ -11,16 +11,16 @@ import {
   RemoveButtonContainer,
 } from "./checkout-item.styles";
 import {
-  clearItemFromCart,
-  addItemToCart,
-  removeItemFromCart,
+  clearItemFromCartStart,
+  addItemToCartSuccess,
+  removeItemFromCartSuccess,
 } from "../../redux/cart/cart.actions";
 
 function CheckoutItem({
   cartItem,
-  clearItemFromCart,
-  addItemToCart,
-  removeItemFromCart,
+  clearItemFromCartStart,
+  addItemToCartSuccess,
+  removeItemFromCartSuccess,
 }) {
   const { name, quantity, price, imageUrl } = cartItem;
 
@@ -31,26 +31,27 @@ function CheckoutItem({
       </ImageContainer>
       <SpanContainer>{name}</SpanContainer>
       <QuantitySpan>
-        <ArrowContainer onClick={() => removeItemFromCart(cartItem)}>
+        <ArrowContainer onClick={() => removeItemFromCartSuccess(cartItem)}>
           &#10094;
         </ArrowContainer>
         <ValueSpan>{quantity}</ValueSpan>
-        <ArrowContainer onClick={() => addItemToCart(cartItem)}>
+        <ArrowContainer onClick={() => addItemToCartSuccess(cartItem)}>
           &#10095;
         </ArrowContainer>
       </QuantitySpan>
       <SpanContainer>{price}</SpanContainer>
-      <RemoveButtonContainer onClick={() => clearItemFromCart(cartItem)}>
+      <RemoveButtonContainer onClick={() => clearItemFromCartStart(cartItem)}>
         &#10005;
       </RemoveButtonContainer>
     </CheckoutItemContainer>
   );
 }
 
-const mapDispatchToProps = {
-  clearItemFromCart,
-  addItemToCart,
-  removeItemFromCart,
-};
+const mapDispatchToProps = (dispatch) => ({
+  addItemToCartSuccess: (item) => dispatch(addItemToCartSuccess(item)),
+  clearItemFromCartStart: (item) => dispatch(clearItemFromCartStart(item)),
+  removeItemFromCartSuccess: (item) => dispatch(removeItemFromCartSuccess(item)),
+});
+
 
 export default connect(null, mapDispatchToProps)(CheckoutItem);

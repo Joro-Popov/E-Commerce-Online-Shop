@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { addItemToCart } from "../../redux/cart/cart.actions";
+import { addItemToCartStart } from "../../redux/cart/cart.actions";
 import {
   CollectionItemContainer,
   ImageContainer,
@@ -10,7 +10,7 @@ import {
   ButtonContainer,
 } from "./collection-item.styles";
 
-function CollectionItem({ item, addItemToCart }) {
+function CollectionItem({ item, addItemToCartStart }) {
   const { name, price, imageUrl } = item;
 
   return (
@@ -25,7 +25,7 @@ function CollectionItem({ item, addItemToCart }) {
         fullWidth
         variant="contained"
         className="button"
-        onClick={() => addItemToCart(item)}
+        onClick={() => addItemToCartStart(item)}
       >
         ADD TO CART
       </ButtonContainer>
@@ -33,8 +33,8 @@ function CollectionItem({ item, addItemToCart }) {
   );
 }
 
-const mapDispatchToProps = {
-  addItemToCart,
-};
+const mapDispatchToProps = (dispatch) => ({
+  addItemToCartStart: (item) => dispatch(addItemToCartStart(item)),
+});
 
 export default connect(null, mapDispatchToProps)(CollectionItem);

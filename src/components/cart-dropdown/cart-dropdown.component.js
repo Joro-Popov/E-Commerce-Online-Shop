@@ -11,12 +11,12 @@ import {
 } from "./cart-dropdown.styles";
 import CartItem from "../cart-item";
 import { selectCartItems } from "../../redux/cart/cart.selectors";
-import { toggleCartDropdown } from "../../redux/cart/cart.actions";
+import { toggleCartDropdownStart } from "../../redux/cart/cart.actions";
 
-function CartDropdown({ cartItems, history, toggleCartDropdown }) {
+function CartDropdown({ cartItems, history, toggleCartDropdownStart }) {
   const goToCheckout = () => {
     history.push("/checkout");
-    toggleCartDropdown();
+    toggleCartDropdownStart();
   };
 
   return (
@@ -48,8 +48,8 @@ const mapStateToProps = createStructuredSelector({
   cartItems: selectCartItems,
 });
 
-const mapDispatchToProps = {
-  toggleCartDropdown
-}
+const mapDispatchToProps = (dispatch) => ({
+  toggleCartDropdownStart: () => dispatch(toggleCartDropdownStart()),
+});
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CartDropdown));

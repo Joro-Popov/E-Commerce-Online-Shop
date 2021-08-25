@@ -11,7 +11,7 @@ const signUpWithEmailAndPassword = async (email, password) => {
 };
 
 const signOut = async () => {
-  await auth.signOut();
+  await  auth.signOut();
 };
 
 const createUserProfile = async (userAuth, additionalData) => {
